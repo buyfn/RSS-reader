@@ -1,16 +1,25 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
-  <title><%= htmlWebpackPlugin.options.title %></title>
+  <title>
+    <%= htmlWebpackPlugin.options.title %>
+  </title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+
 <body>
-    <div class="jumbotron">
-      <form>
-        <input>
-        <input type="submit" value="Add RSS">
-      </form>
-    </div>
+  <div class="jumbotron">
+    <form class="form-inline">
+      <input type="text" size="50" id="feedURL" class="form-control mx-sm-2">
+      <button type="submit" id="addButton" class="btn btn-primary">Add RSS feed</button>
+    </form>
+  </div>
+  <div>
+    <ul id="feeds">
+    </ul>
+  </div>
 </body>
+
 </html>
