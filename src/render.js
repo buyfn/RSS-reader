@@ -19,7 +19,8 @@ const renderItem = (item) => {
 
   return $(`<li class="py-1"><a class="mx-sm-2" href="${href}">${title}</a></li>`)
     .append(modalButton)
-    .append(modal).get(0);
+    .append(modal)
+    .get(0);
 };
 
 const renderFeed = (xml) => {
