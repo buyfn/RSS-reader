@@ -1,21 +1,26 @@
 import $ from 'jquery';
-import { getTitle, getDescription, getLink, getItems, getGuid } from './parse';
+import { getTag, getItems } from './parse';
 
 const renderItem = (item) => {
-  const title = getTitle(item);
-  const href = getLink(item);
-  const description = getDescription(item);
-  const guid = getGuid(item);
+  const title = getTag('title', item) || 'No title found';
+  const href = getTag('link', item) || '#';
+  const description = getTag('description', item) || 'No description found';
 
-  const modal = $(`<div class="modal" role="dialog" tabindex="-1" id=${guid}/>`)
-    .append($('<div class="modal-dialog" role="document"/>')
-      .append($('<div class="modal-content"/>')
-        .append($('<div class="modal-header"/>')
-          .append(`<h3 class="modal-title">${title}</h3>`))
-        .append($('<div class="modal-body"/>')
-          .append(`<p>${description}</p>`))));
+  const modal = document.createElement('div');
+  modal.classList.add('modal');
+  modal.id = href;
+  modal.innerHTML = `<div class="modal-dialog" role="document"/>
+                       <div class="modal-content"/>
+                         <div class="modal-header"/>
+                           <h3 class="modal-title">${title}</h3>
+                         </div>
+                         <div class="modal-body"/>
+                           <p>${description}</p>
+                         </div>
+                       </div>
+                     </div>`;
 
-  const modalButton = $(`<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#${guid}">Check out</button>`);
+  const modalButton = $(`<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#${href}">Check out</button>`);
 
   return $(`<li class="py-1"><a class="mx-sm-2" href="${href}">${title}</a></li>`)
     .append(modalButton)
@@ -24,8 +29,8 @@ const renderItem = (item) => {
 };
 
 const renderFeed = (xml) => {
-  const title = document.createTextNode(getTitle(xml));
-  const description = document.createTextNode(getDescription(xml));
+  const title = document.createTextNode(getTag('title', xml));
+  const description = document.createTextNode(getTag('description', xml));
   const items = getItems(xml);
 
   const titleTag = document.createElement('h2');
