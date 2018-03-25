@@ -1,7 +1,7 @@
 import $ from 'jquery';
-import { getTag, getItems } from './parse';
+import { getTag } from './parse';
 
-const renderItem = (item) => {
+export const renderItem = (item) => {
   const title = getTag('title', item) || 'No title found';
   const href = getTag('link', item) || '#';
   const description = getTag('description', item) || 'No description found';
@@ -28,18 +28,19 @@ const renderItem = (item) => {
     .get(0);
 };
 
-const renderFeed = (xml) => {
-  const title = document.createTextNode(getTag('title', xml));
-  const description = document.createTextNode(getTag('description', xml));
-  const items = getItems(xml);
-
+export const renderFeed = ({
+  url, title, description, items,
+}) => {
+  const titleText = document.createTextNode(title);
   const titleTag = document.createElement('h2');
-  titleTag.append(title);
+  titleTag.append(titleText);
 
+  const descriptionText = document.createTextNode(description);
   const descriptionTag = document.createElement('p');
-  descriptionTag.append(description);
+  descriptionTag.append(descriptionText);
 
   const itemList = document.createElement('ul');
+  itemList.id = url;
   const itemTags = items.map(renderItem);
   itemTags.forEach(item => itemList.append(item));
 
@@ -50,5 +51,3 @@ const renderFeed = (xml) => {
 
   return li;
 };
-
-export default renderFeed;

@@ -1,14 +1,12 @@
 import axios from 'axios';
-import renderFeed from './render';
+import { parseFeed } from './parse';
 
-const addFeed = (url, mountNode, proxy = '') => {
+const fetchFeed = (url, proxy = '') =>
   axios.get(`${proxy}${url}`)
     .then((res) => {
-      const parser = new DOMParser();
       const { data } = res;
-      const xml = parser.parseFromString(data, 'text/xml');
-      mountNode.prepend(renderFeed(xml));
+      const feed = { url, ...parseFeed(data) };
+      return feed;
     });
-};
 
-export default addFeed;
+export default fetchFeed;

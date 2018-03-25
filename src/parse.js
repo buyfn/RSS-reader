@@ -7,3 +7,14 @@ export const getItems = (xml) => {
   const items = [...xml.getElementsByTagName('item')];
   return items;
 };
+
+export const parseFeed = (str) => {
+  const parser = new DOMParser();
+  const dom = parser.parseFromString(str, 'text/xml');
+
+  const title = getTag('title', dom);
+  const description = getTag('description', dom);
+  const items = getItems(dom);
+
+  return { title, description, items };
+};
