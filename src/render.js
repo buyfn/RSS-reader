@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import { getTag } from './parse';
+import './main.css';
 
 export const renderItem = (item) => {
   const title = getTag('title', item) || 'No title found';
@@ -22,7 +23,7 @@ export const renderItem = (item) => {
 
   const modalButton = $(`<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#${href}">Check out</button>`);
 
-  return $(`<li class="py-1"><a class="mx-sm-2" href="${href}">${title}</a></li>`)
+  return $(`<li class="item my-1 py-1"><a class="mx-sm-2" href="${href}">${title}</a></li>`)
     .append(modalButton)
     .append(modal)
     .get(0);

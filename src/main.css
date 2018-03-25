@@ -1,0 +1,14 @@
+@-webkit-keyframes yellow-fade {   
+   0% {background: rgba(245, 233, 132, 0.5);}
+   100% {background: none;}
+}
+
+@keyframes yellow-fade {
+   0% {background: rgba(245, 233, 132, 0.5);}
+   100% {background: none;}
+}
+
+.item {
+    -webkit-animation: yellow-fade 2s ease-in 1;
+    animation: yellow-fade 2s ease-in 1;
+}
