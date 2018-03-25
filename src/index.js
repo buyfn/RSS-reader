@@ -52,22 +52,28 @@ submit.addEventListener('click', (e) => {
   }
 });
 
-const update = () => {
-  state.feeds.forEach((feed) => {
-    const updatedFeed = fetchFeed(feed.url, corsProxy);
-    updatedFeed.then((res) => {
-      const newItems = res.items.filter((item) => {
-        const pubDate = new Date(getTag('pubDate', item));
-        return pubDate > state.lastUpdate;
-      });
+const refresh = () => {
+  const promises = state.feeds.map(feed => fetchFeed(feed.url, corsProxy));
+  Promise.all(promises)
+    .then((feeds) => {
+      feeds.forEach((feed) => {
+        const newItems = feed.items.filter((item) => {
+          const pubDate = new Date(getTag('pubDate', item));
+          return pubDate > state.lastUpdate;
+        });
 
-      if (newItems.length > 0) {
         const itemList = document.getElementById(feed.url);
-        newItems.reverse().forEach(item => itemList.prepend(renderItem(item)));
-      }
-    }).then(() => { state.lastUpdate = new Date(); });
-  });
-  window.setTimeout(update, 5000);
+        newItems.reverse().forEach((item) => {
+          itemList.prepend(renderItem(item));
+        });
+      });
+    })
+    .then(() => {
+      state.lastUpdate = new Date();
+    })
+    .then(() => {
+      setTimeout(refresh, 5000);
+    });
 };
 
-update(state);
+refresh();
