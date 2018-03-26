@@ -21,7 +21,7 @@ export const renderItem = (item) => {
                        </div>
                      </div>`;
 
-  const modalButton = $(`<button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#${href}">Check out</button>`);
+  const modalButton = $(`<button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#${href}">Check out</button>`);
 
   return $(`<li class="item my-1 py-1"><a href="${href}">${title}</a></br></li>`)
     .append(modalButton)
