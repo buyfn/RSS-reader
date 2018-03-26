@@ -31,6 +31,6 @@ ul#feeds {
 
 ul#feeds > li {
     list-style: none;
-    margin-right: 1em;
+    margin-right: 2em;
     width: 360px;
 }
