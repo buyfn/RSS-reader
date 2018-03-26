@@ -73,6 +73,9 @@ const refresh = () => {
     })
     .then(() => {
       setTimeout(refresh, 5000);
+    })
+    .catch(() => {
+      setTimeout(refresh, 5000);
     });
 };
 

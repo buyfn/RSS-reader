@@ -23,7 +23,7 @@ export const renderItem = (item) => {
 
   const modalButton = $(`<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#${href}">Check out</button>`);
 
-  return $(`<li class="item my-1 py-1"><a class="mx-sm-2" href="${href}">${title}</a></li>`)
+  return $(`<li class="item my-1 py-1"><a href="${href}">${title}</a></br></li>`)
     .append(modalButton)
     .append(modal)
     .get(0);
@@ -33,7 +33,7 @@ export const renderFeed = ({
   url, title, description, items,
 }) => {
   const titleText = document.createTextNode(title);
-  const titleTag = document.createElement('h2');
+  const titleTag = document.createElement('h3');
   titleTag.append(titleText);
 
   const descriptionText = document.createTextNode(description);
@@ -41,6 +41,7 @@ export const renderFeed = ({
   descriptionTag.append(descriptionText);
 
   const itemList = document.createElement('ul');
+  itemList.classList.add('items');
   itemList.id = url;
   const itemTags = items.map(renderItem);
   itemTags.forEach(item => itemList.append(item));

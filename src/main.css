@@ -12,3 +12,25 @@
     -webkit-animation: yellow-fade 2s ease-in 1;
     animation: yellow-fade 2s ease-in 1;
 }
+
+ul.items {
+    list-style: none;
+    padding-left: 0;
+    width: 360px;
+}
+
+ul.items > li {
+    padding: 0;
+    margin: 0;
+}
+
+ul#feeds {
+    display: flex;
+    overflow-x: scroll;
+}
+
+ul#feeds > li {
+    list-style: none;
+    margin-right: 1em;
+    width: 360px;
+}
